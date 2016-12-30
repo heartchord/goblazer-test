@@ -1,36 +1,34 @@
 package main
 
 import (
-	"bytes"
-	"encoding/binary"
 	"fmt"
+	"io/ioutil"
+	"os"
 
-	"github.com/heartchord/jxonline/gamestruct"
+	gmencoder "github.com/heartchord/jxonline/gameencoder"
+	"github.com/henrylee2cn/mahonia"
 )
 
-type A struct {
-	// should be exported member when read back from buffer
-	There byte
-	One   int32
-	Two   int32
-}
-
 func main() {
-	var aa A
-	var a A
+	f, err := os.Open("D:/蓝水晶.bak")
+	if err != nil {
+		panic(err)
+	}
+	defer f.Close()
 
-	a.One = int32(1)
-	a.Two = int32(2)
-	a.There = byte(1)
+	data, err := ioutil.ReadAll(f)
+	encoder := new(gmencoder.RoleBakEncoder)
+	encoder.Decode(data)
 
-	buf := new(bytes.Buffer)
-	fmt.Println("a‘s size is ", binary.Size(a))
-	binary.Write(buf, binary.LittleEndian, a)
-	fmt.Println("after write ，buf is:", buf.Bytes())
+	mdecoder := mahonia.NewDecoder("GBK")
+	rolename := string(encoder.RoleData.BaseData.RoleName[:])
 
-	binary.Read(buf, binary.LittleEndian, &aa)
-	fmt.Println("after aa is ", aa)
+	rolename = mdecoder.ConvertString(rolename)
+	fmt.Println(rolename)
 
-	var r gamestruct.RoleData
-	fmt.Println(binary.Size(r))
+	account := string(encoder.RoleData.BaseData.Account[:])
+	account = mdecoder.ConvertString(account)
+	fmt.Println(account)
+
+	fmt.Println(encoder.RoleData.BaseData.PrimaryKey)
 }
