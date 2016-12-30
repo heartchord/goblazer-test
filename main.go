@@ -7,9 +7,5 @@ import (
 )
 
 func main() {
-	if goblazer.IsFileExisted("D:\\WorkSpace") {
-		fmt.Println("existed")
-	} else {
-		fmt.Println("not existed")
-	}
+	fmt.Println(goblazer.GetAppRootPath())
 }
