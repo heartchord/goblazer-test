@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	f, err := os.Open("D:/温柔的づ杀戮↓.bak")
+	f, err := os.Open("D:/蓝水晶.bak")
 	if err != nil {
 		panic(err)
 	}
@@ -22,17 +22,19 @@ func main() {
 
 	mdecoder := mahonia.NewDecoder("GBK")
 
-	rolename := string(encoder.RoleData.BaseData.RoleName[:])
+	rolename := string(encoder.RoleData.RoleName[:])
 	rolename = mdecoder.ConvertString(rolename)
 	fmt.Println(rolename)
 
-	account := string(encoder.RoleData.BaseData.Account[:])
+	account := string(encoder.RoleData.Account[:])
 	account = mdecoder.ConvertString(account)
 	fmt.Println(account)
 
-	for i := int16(0); i < encoder.RoleData.FightSkillCount; i++ {
-		fmt.Printf("SkillData.SkillID = %d\n", encoder.SkillData[i].SkillID)
-		fmt.Printf("SkillData.SkillLv = %d\n", encoder.SkillData[i].SkillLv)
-		fmt.Printf("SkillData.SkillExp = %d\n", encoder.SkillData[i].SkillExp)
+	for i := 0; i < len(encoder.FSkillData); i++ {
+		fmt.Printf("Skill[%4d] = {%2d, %d}\n", encoder.FSkillData[i].SkillID, encoder.FSkillData[i].SkillLv, encoder.FSkillData[i].SkillExp)
+	}
+
+	for i := 0; i < len(encoder.TaskData); i++ {
+		fmt.Printf("Task[ %4d ] = %d\n", encoder.TaskData[i].TaskID, encoder.TaskData[i].TaskValue)
 	}
 }
