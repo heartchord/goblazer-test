@@ -32,5 +32,5 @@ func main() {
 
 	//encoder.PrintAllSkillData()
 	//encoder.PrintAllTaskData()
-	encoder.PrintAllItemData()
+	//encoder.PrintAllItemData()
 }
