@@ -30,11 +30,7 @@ func main() {
 	account = mdecoder.ConvertString(account)
 	fmt.Println(account)
 
-	for i := 0; i < len(encoder.FSkillData); i++ {
-		fmt.Printf("Skill[%4d] = {%2d, %d}\n", encoder.FSkillData[i].SkillID, encoder.FSkillData[i].SkillLv, encoder.FSkillData[i].SkillExp)
-	}
-
-	for i := 0; i < len(encoder.TaskData); i++ {
-		fmt.Printf("Task[ %4d ] = %d\n", encoder.TaskData[i].TaskID, encoder.TaskData[i].TaskValue)
-	}
+	//encoder.PrintAllSkillData()
+	//encoder.PrintAllTaskData()
+	encoder.PrintAllItemData()
 }
