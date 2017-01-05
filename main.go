@@ -10,14 +10,14 @@ import (
 )
 
 func main() {
-	f, err := os.Open("D:/蓝水晶.bak")
+	f, err := os.Open("D:/道骨仙风.bak")
 	if err != nil {
 		panic(err)
 	}
 	defer f.Close()
 
 	data, err := ioutil.ReadAll(f)
-	encoder := new(gmencoder.RoleBakEncoder)
+	encoder := gmencoder.NewRoleBakEncoder()
 	encoder.Decode(data)
 
 	mdecoder := mahonia.NewDecoder("GBK")
@@ -30,7 +30,8 @@ func main() {
 	account = mdecoder.ConvertString(account)
 	fmt.Println(account)
 
+	encoder.RoleExtData.PrintEquipComposeData()
 	//encoder.PrintAllSkillData()
 	//encoder.PrintAllTaskData()
-	//encoder.PrintAllItemData()
+	encoder.PrintAllItemData()
 }
