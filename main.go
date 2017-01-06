@@ -22,11 +22,11 @@ func main() {
 
 	mdecoder := mahonia.NewDecoder("GBK")
 
-	rolename := string(encoder.RoleData.RoleName[:])
+	rolename := string(encoder.RoleBaseData.RoleName[:])
 	rolename = mdecoder.ConvertString(rolename)
 	fmt.Println(rolename)
 
-	account := string(encoder.RoleData.Account[:])
+	account := string(encoder.RoleBaseData.Account[:])
 	account = mdecoder.ConvertString(account)
 	fmt.Println(account)
 
